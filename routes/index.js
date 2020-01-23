@@ -11,8 +11,6 @@ module.exports = router;
 const User = require("../models/user");
 const mongoose = require("mongoose");
 
-var userid = "";
-
 //로그인 여부 확인 함수.
 var isAuthenticated = function(req, res, next) {
   if (req.isAuthenticated()) {
@@ -30,7 +28,7 @@ router.get("/", function(req, res) {
   }
 });
 router.get("/home", function(req, res) {
-  res.render("home", { message: userid });
+  res.render("home", { message: req.session.message });
 });
 router.get("/login", function(req, res) {
   res.render("login", { page: "login", what: "" });
@@ -39,9 +37,10 @@ router.get("/login/error", (req, res) =>
   res.render("login", { page: "login", what: "Wrong id/pw" })
 );
 router.get("/login/success", isAuthenticated, function(req, res) {
-  // console.log("{{{{{{{{{" + req.session.message);
-  var userid = req.flash("login_message");
-  res.render("success", { page: "login success", message: userid });
+  res.render("success", {
+    page: "login success",
+    message: req.session.message
+  });
 });
 router.get("/signup", (req, res) =>
   res.render("signup", { page: "signup", what: "" })
@@ -61,7 +60,7 @@ router.get("/signup/success", (req, res) =>
 router.get("/logout", function(req, res) {
   req.logout();
   res.redirect("/");
-  userid = "";
+  req.session.message = "";
 });
 
 router.post("/signup" || "/signup/error", (req, res, next) => {
@@ -119,7 +118,7 @@ passport.use(
             ); // 로그인 실패
           } else {
             //////////////////////////
-            //req.session.message = id;
+            req.session.message = id;
             req.flash("login_message", id);
             //////////////////////////
             return done(null, user); // 로그인 성공
@@ -133,10 +132,6 @@ passport.use(
 //로그인에 성공할 시 serializeUser 메서드를 통해서 사용자 정보를 세션에 저장
 passport.serializeUser(function(user, done) {
   done(null, user);
-  // 유저 정보 노출 위험성있음
-  ///////////////////////////
-  userid = user.id;
-  ///////////////////////////
 });
 
 //사용자 인증 후 요청이 있을 때마다 호출
@@ -145,9 +140,9 @@ passport.deserializeUser(function(user, done) {
 });
 
 router.post(
-  "/login",
+  "/login" || "/login/error",
   passport.authenticate("local", {
-    failureRedirect: "/login",
+    failureRedirect: "/login/error",
     failureFlash: true
   }), // 인증 실패 시 '/login'으로 이동
   function(req, res) {

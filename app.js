@@ -49,7 +49,6 @@ app.use(passport.session());
 
 // routes
 const indexRoute = require("./routes/index");
-
 const boardRoute = require("./routes/board");
 
 // 뷰엔진 설정

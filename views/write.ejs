@@ -1,0 +1,22 @@
+<body>
+  <header class="header">
+    <h1 class="header__title">WRITE NEW</h1>
+  </header>
+  <form action="/write" method="POST" class="writeform">
+    <div>
+      <label for="title">TITLE</label>
+      <input name="title" type="title" required />
+    </div>
+    <div>
+      <label for="body">BODY</label>
+      <input name="body" type="body" required />
+    </div>
+    <button class="btn">POST!</button>
+    <input
+      type="button"
+      class="btn"
+      onclick=" location.href='/home'"
+      value="GO BACK"
+    />
+  </form>
+</body>

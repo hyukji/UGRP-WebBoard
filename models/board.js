@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
-const UserSchema = new mongoose.Schema({
-  id: { type: String, required: true },
-  password: { type: String, required: true },
-  name: { type: String, required: true },
-  schoolnum: { type: Number, required: true },
-  isAdmin: { type: Boolean, default: false }
+const boardSchema = new mongoose.Schema({
+  writer: { type: String, required: true },
+  title: { type: String, required: true },
+  body: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now }, // 2
+  updatedAt: { type: Date }
 });
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("Board", boardSchema);
