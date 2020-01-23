@@ -1,0 +1,27 @@
+<body>
+  <header class="header">
+    <h1 class="header__title"><%=page%></h1>
+  </header>
+  <div class="intro">
+    <% if(what != ""){ %> <%=what%> <%} else {%>
+    <text>welcome to this page.</text>
+    <%}%>
+  </div>
+  <form action="/login" method="POST" class="loginform">
+    <div>
+      <label for="id">ID</label>
+      <input name="id" type="id" required />
+    </div>
+    <div>
+      <label for="password">PASSWORD</label>
+      <input name="password" type="password" required />
+    </div>
+    <button class="btn">Login!</button>
+    <input
+      type="button"
+      class="btn"
+      onclick=" location.href='/'"
+      value="GO BACK"
+    />
+  </form>
+</body>

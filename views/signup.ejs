@@ -1,0 +1,35 @@
+<body>
+  <header class="header">
+    <h1 class="header__title"><%=page%></h1>
+  </header>
+  <div class="intro">
+    <% if(what != ""){ %> <%=what%> <%} else {%>
+    <text>welcome to this page.</text>
+    <%}%>
+  </div>
+  <form action="/signup" method="POST" class="signupform">
+    <div>
+      <label for="name">NAME</label>
+      <input name="name" type="text" required />
+    </div>
+    <div>
+      <label for="schoolnum">SCHOOLNUM</label>
+      <input name="schoolnum" type="schoolnum" required />
+    </div>
+    <div>
+      <label for="id">ID</label>
+      <input name="id" type="id" required />
+    </div>
+    <div>
+      <label for="password">PASSWORD</label>
+      <input name="password" type="password" required />
+    </div>
+    <button class="btn">SIGNUP!</button>
+    <input
+      type="button"
+      class="btn"
+      onclick=" location.href='/'"
+      value="GO BACK"
+    />
+  </form>
+</body>

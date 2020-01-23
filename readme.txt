@@ -1,1 +1,0 @@
-Kakao Desktop App Clone
