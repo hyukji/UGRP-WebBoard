@@ -20,6 +20,18 @@ router.get("/write", isAuthenticated, function(req, res) {
   res.render("write");
 });
 
+router.get("/post/:id", isAuthenticated, function(req, res) {
+  console.log(req.params.id);
+  Board.findOne({ _id: req.params.id }, function(err, post) {
+    res.render("post", {
+      writer: post.writer,
+      title: post.title,
+      body: post.body,
+      createdAt: post.createdAt
+    });
+  });
+});
+
 router.get("/write/success", (req, res) =>
   res.render("success", {
     page: "write success",
@@ -31,7 +43,7 @@ router.post("/write", (req, res, next) => {
   console.log(req.body);
   const newboard = new Board({
     _id: new mongoose.Types.ObjectId(),
-    writer: req.session.message,
+    writer: req.user.id,
     title: req.body.title,
     body: req.body.body
   });

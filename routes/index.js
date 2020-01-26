@@ -9,6 +9,7 @@ const LocalStrategy = require("passport-local").Strategy;
 module.exports = router;
 
 const User = require("../models/user");
+const Board = require("../models/board");
 const mongoose = require("mongoose");
 
 //로그인 여부 확인 함수.
@@ -27,8 +28,11 @@ router.get("/", function(req, res) {
     res.render("index");
   }
 });
-router.get("/home", function(req, res) {
-  res.render("home", { message: req.session.message });
+
+router.get("/home", isAuthenticated, function(req, res) {
+  Board.find(function(err, elements) {
+    res.render("home", { message: req.user.id, boarddata: elements });
+  });
 });
 router.get("/login", function(req, res) {
   res.render("login", { page: "login", what: "" });
@@ -39,7 +43,7 @@ router.get("/login/error", (req, res) =>
 router.get("/login/success", isAuthenticated, function(req, res) {
   res.render("success", {
     page: "login success",
-    message: req.session.message
+    message: req.user.id
   });
 });
 router.get("/signup", (req, res) =>
@@ -60,7 +64,6 @@ router.get("/signup/success", (req, res) =>
 router.get("/logout", function(req, res) {
   req.logout();
   res.redirect("/");
-  req.session.message = "";
 });
 
 router.post("/signup" || "/signup/error", (req, res, next) => {
@@ -117,10 +120,7 @@ passport.use(
               req.flash("login_message", "아이디 또는 비밀번호를 확인하세요.")
             ); // 로그인 실패
           } else {
-            //////////////////////////
-            req.session.message = id;
             req.flash("login_message", id);
-            //////////////////////////
             return done(null, user); // 로그인 성공
           }
         }
@@ -147,7 +147,6 @@ router.post(
   }), // 인증 실패 시 '/login'으로 이동
   function(req, res) {
     res.redirect("/login/success");
-    //console.log("로그인 할때 유저아이디 :" + req);
     //로그인 성공 시 '/'으로 이동
   }
 );

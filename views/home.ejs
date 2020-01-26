@@ -19,8 +19,16 @@
 
     </div>
     <div>
-      게시판 생성 예정...
-
+      <%boarddata.forEach(function(element) {%>
+      <div>
+        <form action="/home" method="POST" class="postform"></form>
+        <text><%=element.writer%></text>
+          <a href="/post/<%=element.id%>"><%=element.title%></a>
+       
+      
+      <text><%=element.createdAt%></text> </form>
+      </div>
+      <% });%>
 
     </div>
   </div>
