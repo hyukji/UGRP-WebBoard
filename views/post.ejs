@@ -1,12 +1,56 @@
 <body>
   <header class="header">
-    <h1 class="header__title"><%=title%></h1>
+    <h1 class="header__title"><%=postdata.title%></h1>
+    <div>Writer: <%=postdata.writer%></div>
+    <div>Date: <%=postdata.createdAt%></div>
+    <div><%=postdata.body%></div>
   </header>
+
   <div>
-    <div><%=writer%></div>
-    <div><%=body%></div>
-    <div><%=createdAt%></div>
+    <%if(usinguser==postdata.writer){%>
+    <input
+      type="button"
+      class="btn"
+      onclick=" location.href='/posting/<%=postdata._id%>/edit'"
+      value="EDIT"
+    />
+    <input
+      type="button"
+      class="btn"
+      onclick=" location.href='/posting/<%=postdata._id%>/del'"
+      value="DEL"
+    />
+    <%}%>
   </div>
+
+  <div>
+    <form
+      action="/posting/<%=postdata._id%>/comment"
+      method="POST"
+      class="commentform"
+    >
+      <label for="comment">Write Commnet</label>
+      <input name="comment" type="comment" required />
+      <button class="btn">enter</button>
+
+      <%commentdata.forEach(function(celement) {%>
+    </form>
+    <div>
+      <text><%=celement.writer%></text>
+      <text><%=celement.body%></text>
+      <text><%=celement.createdAt%></text>
+      <%if(usinguser==celement.writer){%>
+      <input
+        type="button"
+        class="btn"
+        onclick=" location.href='/posting/<%=postdata._id%>/comment/<%=celement._id%>/del'"
+        value="DEL"
+      />
+      <%}%>
+    </div>
+    <% });%>
+  </div>
+
   <div>
     <input
       type="button"

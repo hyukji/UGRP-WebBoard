@@ -30,9 +30,11 @@ router.get("/", function(req, res) {
 });
 
 router.get("/home", isAuthenticated, function(req, res) {
-  Board.find(function(err, elements) {
-    res.render("home", { message: req.user.id, boarddata: elements });
-  });
+  Board.find()
+    .sort({ createdAt: -1 })
+    .exec(function(err, elements) {
+      res.render("home", { message: req.user.id, boarddata: elements });
+    });
 });
 router.get("/login", function(req, res) {
   res.render("login", { page: "login", what: "" });

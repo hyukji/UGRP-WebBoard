@@ -1,0 +1,23 @@
+<body>
+  <header class="header">
+    <h1 class="header__title"><%=page%></h1>
+  </header>
+
+  <div>
+    <label for="title">TITLE : <%=board.title%></label>
+  </div>
+  <form action="/posting/<%=board._id%>/edit" method="POST" class="editform">
+    <div>
+      <label for="body">BODY</label>
+      <input type="text" name="body" value="<%=board.body%>" required />
+    </div>
+    <button class="btn">REPOSTING</button>
+  </form>
+
+  <input
+    type="button"
+    class="btn"
+    onclick=" location.href='/home'"
+    value="GO BACK"
+  />
+</body>
