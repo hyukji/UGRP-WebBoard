@@ -131,6 +131,12 @@ passport.use(
   )
 );
 
+/*
+Passport.js 는 Strategy를 이용해서 user를 디비에 저장하고 
+serialize user를 통해 세션을 생성하고 
+deserialize user를 통해 req.user 객체에 유저 정보를 저장한다.
+*/
+
 //로그인에 성공할 시 serializeUser 메서드를 통해서 사용자 정보를 세션에 저장
 passport.serializeUser(function(user, done) {
   done(null, user);
