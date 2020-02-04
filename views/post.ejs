@@ -8,18 +8,16 @@
 
   <div>
     <%if(usinguser==postdata.writer){%>
-    <input
-      type="button"
-      class="btn"
-      onclick=" location.href='/posting/<%=postdata._id%>/edit'"
-      value="EDIT"
-    />
-    <input
-      type="button"
-      class="btn"
-      onclick=" location.href='/posting/<%=postdata._id%>/del'"
-      value="DEL"
-    />
+    <form action="/posting/<%=postdata._id%>/edit" method="GET" class="B_Edit">
+      <button class="btnedit">EDIT</button>
+    </form>
+    <form
+      action="/posting/<%=postdata._id%>/?_method=delete"
+      method="POST"
+      class="B_DEL"
+    >
+      <button class="btndel">DEL</button>
+    </form>
     <%}%>
   </div>
 
@@ -40,12 +38,14 @@
       <text><%=celement.body%></text>
       <text><%=celement.createdAt%></text>
       <%if(usinguser==celement.writer){%>
-      <input
-        type="button"
-        class="btn"
-        onclick=" location.href='/posting/<%=postdata._id%>/comment/<%=celement._id%>/del'"
-        value="DEL"
-      />
+      <form
+        action="/posting/<%=postdata._id%>/comment/<%=celement._id%>/?_method=delete"
+        method="POST"
+        class="comment_del"
+      >
+        <button class="btn">DEL</button>
+      </form>
+
       <%}%>
     </div>
     <% });%>

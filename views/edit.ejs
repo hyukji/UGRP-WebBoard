@@ -6,7 +6,12 @@
   <div>
     <label for="title">TITLE : <%=board.title%></label>
   </div>
-  <form action="/posting/<%=board._id%>/edit" method="POST" class="editform">
+
+  <form
+    action="/posting/<%=board._id%>/?_method=patch"
+    method="POST"
+    class="boardeditform"
+  >
     <div>
       <label for="body">BODY</label>
       <input type="text" name="body" value="<%=board.body%>" required />

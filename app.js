@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 3000;
 
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+var methodOverride = require("method-override"); //_method의 query로 들어오는 값으로 HTTP의 method을 바꿈
 
 //로그인을 위한 모듈들.
 const passport = require("passport"); //인증
@@ -15,8 +16,9 @@ var MongoDBStore = require("connect-mongodb-session")(Session); //플래시 메�
 // DB연결
 let url = "mongodb://localhost:27017/dalhav";
 mongoose.connect(url, { useNewUrlParser: true });
-
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(methodOverride("_method"));
 
 //여기 부터 밑에 로그인을 위한 코드.
 app.use(flash());
@@ -57,7 +59,7 @@ app.set("view engine", "ejs");
 
 // use routes
 app.use("/", indexRoute);
-app.use("/", boardRoute);
+app.use("/posting", boardRoute);
 
 //listen
 app.listen(PORT, function() {

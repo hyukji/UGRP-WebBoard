@@ -23,7 +23,7 @@ router.get("/write", isAuthenticated, function(req, res) {
   });
 });
 
-router.get("/posting/:id/edit", isAuthenticated, function(req, res) {
+router.get("/:id/edit", isAuthenticated, function(req, res) {
   Board.findOne({ _id: req.params.id }, function(err, board) {
     if (board) {
       res.render("edit", {
@@ -33,8 +33,8 @@ router.get("/posting/:id/edit", isAuthenticated, function(req, res) {
     }
   });
 });
-
-router.get("/posting/:id/del", (req, res, next) => {
+///////////////////////////////////////////////////////////////////////////////
+router.delete("/:id", (req, res, next) => {
   Board.findOneAndDelete({ _id: req.params.id }, function(err, result) {
     // Comment.find({ post: req.params.id }, function(err, comments) {
     //   comments.forEach(function(comment) {});
@@ -44,7 +44,7 @@ router.get("/posting/:id/del", (req, res, next) => {
   res.redirect("/home");
 });
 
-router.get("/posting/:id/comment/:commentid/del", (req, res, next) => {
+router.delete("/:id/comment/:commentid", (req, res, next) => {
   Comment.findOneAndDelete({ _id: req.params.commentid }, function(
     err,
     result
@@ -53,7 +53,7 @@ router.get("/posting/:id/comment/:commentid/del", (req, res, next) => {
   });
 });
 
-router.get("/posting/:id", isAuthenticated, function(req, res) {
+router.get("/:id", isAuthenticated, function(req, res) {
   Board.findOne({ _id: req.params.id }, function(err, posting) {
     //console.log(post);
     Comment.find({ post: req.params.id })
@@ -87,14 +87,14 @@ router.post("/write", (req, res, next) => {
     .save()
     .then(result => {
       //console.log(result);
-      res.redirect("/write/success");
+      res.redirect("/posting/write/success");
     })
     .catch(err => {
       console.log(err);
     });
 });
 
-router.post("/posting/:id/comment", (req, res, next) => {
+router.post("/:id/comment", (req, res, next) => {
   const newcomment = new Comment({
     _id: new mongoose.Types.ObjectId(),
     post: req.params.id,
@@ -111,7 +111,8 @@ router.post("/posting/:id/comment", (req, res, next) => {
     });
 });
 
-router.post("/posting/:id/edit", (req, res, next) => {
+////////////////////////////////////////////////////////////////
+router.patch("/:id", (req, res, next) => {
   Board.findByIdAndUpdate(
     { _id: req.params.id },
     { body: req.body.body },
