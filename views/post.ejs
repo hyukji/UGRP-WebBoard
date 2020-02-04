@@ -11,13 +11,21 @@
     <form action="/posting/<%=postdata._id%>/edit" method="GET" class="B_Edit">
       <button class="btnedit">EDIT</button>
     </form>
-    <form
-      action="/posting/<%=postdata._id%>/?_method=delete"
-      method="POST"
-      class="B_DEL"
-    >
-      <button class="btndel">DEL</button>
-    </form>
+
+    <button>
+      <form
+        action="/posting/<%=postdata._id%>/?_method=delete"
+        method="POST"
+        class="B_DEL"
+      >
+        <a
+          href="#"
+          onclick="confirm('Do you want to delete this?')?this.parentElement.submit():null;"
+          >Del</a
+        >
+      </form>
+    </button>
+
     <%}%>
   </div>
 
@@ -38,14 +46,19 @@
       <text><%=celement.body%></text>
       <text><%=celement.createdAt%></text>
       <%if(usinguser==celement.writer){%>
-      <form
-        action="/posting/<%=postdata._id%>/comment/<%=celement._id%>/?_method=delete"
-        method="POST"
-        class="comment_del"
-      >
-        <button class="btn">DEL</button>
-      </form>
-
+      <button>
+        <form
+          action="/posting/<%=postdata._id%>/comment/<%=celement._id%>/?_method=delete"
+          method="POST"
+          class="comment_del"
+        >
+          <a
+            href="#"
+            onclick="confirm('Do you want to delete this?')?this.parentElement.submit():null;"
+            >Delete</a
+          >
+        </form>
+      </button>
       <%}%>
     </div>
     <% });%>
