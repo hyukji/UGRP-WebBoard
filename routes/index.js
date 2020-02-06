@@ -12,6 +12,8 @@ const User = require("../models/user");
 const Board = require("../models/board");
 const mongoose = require("mongoose");
 
+const bcrypt = require("bcrypt-nodejs");
+
 //로그인 여부 확인 함수.
 var isAuthenticated = function(req, res, next) {
   if (req.isAuthenticated()) {
@@ -76,12 +78,16 @@ router.post("/signup" || "/signup/error", (req, res, next) => {
       console.log("error-findone user from db in signup");
     } else {
       if (user.length < 1) {
+        // 암호화 시키기
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(req.body.password, salt);
+
         const newuser = new User({
           _id: new mongoose.Types.ObjectId(),
           id: req.body.id,
           schoolnum: req.body.schoolnum,
           name: req.body.name,
-          password: req.body.password
+          password: hash
         });
         newuser
           .save()
@@ -109,8 +115,8 @@ passport.use(
     function(req, id, password, done) {
       User.findOne(
         {
-          id: id,
-          password: password
+          id: id
+          //password: password
         },
         function(err, user) {
           if (err) {
@@ -119,11 +125,20 @@ passport.use(
             return done(
               null,
               false,
-              req.flash("login_message", "아이디 또는 비밀번호를 확인하세요.")
+              req.flash("login_message", "해당아이디는 존재하지 않습니다.")
             ); // 로그인 실패
           } else {
-            req.flash("login_message", id);
-            return done(null, user); // 로그인 성공
+            var result = bcrypt.compareSync(password, user.password);
+            if (result) {
+              req.flash("login_message", id);
+              return done(null, user); // 로그인 성공
+            } else {
+              return done(
+                null,
+                false,
+                req.flash("login_message", "비밀번호가 틀렸습니다.")
+              );
+            }
           }
         }
       );
