@@ -55,6 +55,7 @@ router.delete("/:id/comment/:commentid", (req, res, next) => {
 
 router.get("/:id", isAuthenticated, function(req, res) {
   Board.findOne({ _id: req.params.id }, function(err, posting) {
+    posting.hits += 1;
     //console.log(post);
     Comment.find({ post: req.params.id })
       .sort({ createdAt: -1 })
@@ -81,7 +82,8 @@ router.post("/write", (req, res, next) => {
     _id: new mongoose.Types.ObjectId(),
     writer: req.user.id,
     title: req.body.title,
-    body: req.body.body
+    body: req.body.body,
+    hits: 0
   });
   newboard
     .save()

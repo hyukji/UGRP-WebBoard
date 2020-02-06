@@ -1,0 +1,50 @@
+.Board_dataname {
+  background-color: rgb(247, 247, 247);
+  display: flex;
+  margin: 0 auto;
+  height: 40px;
+  align-items: center;
+}
+
+.Board_data {
+  display: flex;
+  margin: 0 auto;
+  height: 40px;
+  align-items: center;
+}
+
+.postingnum {
+  width: 60px;
+  text-align: center;
+  margin-bottom: 7px;
+  margin-top: 7px;
+}
+.postingtitle {
+  width: 400px;
+  text-align: center;
+  margin-bottom: 7px;
+  margin-top: 7px;
+}
+.postingdate {
+  width: 130px;
+  text-align: center;
+  margin-bottom: 7px;
+  margin-top: 7px;
+}
+.postingwriter {
+  width: 70px;
+  text-align: center;
+  margin-bottom: 7px;
+  margin-top: 7px;
+}
+.postinghits {
+  text-align: center;
+  width: 70px;
+  margin-bottom: 7px;
+  margin-top: 7px;
+}
+
+.mainbody {
+  width: 750px;
+  height: 2000px;
+}

@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+}
+
+.header_title {
+  font-size: 35px;
+  font-weight: 700;
+  margin-bottom: 35px;
+}
+
+.header_btn_write {
+  margin-left: 15px;
+}

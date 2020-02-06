@@ -35,7 +35,11 @@ router.get("/home", isAuthenticated, function(req, res) {
   Board.find()
     .sort({ createdAt: -1 })
     .exec(function(err, elements) {
-      res.render("home", { message: req.user.id, boarddata: elements });
+      res.render("home", {
+        message: req.user.id,
+        boarddata: elements,
+        num: elements.length
+      });
     });
 });
 router.get("/login", function(req, res) {
