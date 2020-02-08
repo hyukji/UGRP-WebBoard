@@ -33,6 +33,7 @@ router.get("/:id/edit", isAuthenticated, function(req, res) {
     }
   });
 });
+
 ///////////////////////////////////////////////////////////////////////////////
 router.delete("/:id", (req, res, next) => {
   Board.findOneAndDelete({ _id: req.params.id }, function(err, result) {

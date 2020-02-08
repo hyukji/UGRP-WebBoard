@@ -1,59 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="/css/styles.css" type="text/css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" /></head>
-<body>
-
-  <div class="status-bar">
-    <span class= status-bar_webname>UGRP_WebBoard</span>
-   
-    <div class="status-bar_column">
-      <input
-      type="button"
-      class="btn"
-      onclick=" location.href='/logout'"
-      value="LOGOUT"
-    /> 
-      <i class="fas fa-user"></i>
-      <i class="fas fa-cog"></i>
-    </div>
-  </div>
-<div class= mainbody>
-  <div class=header>
-    <h1 class="header_title">일반공지</span>
-    <input
-    type="button"
-    class="header_btn_write"
-    onclick=" location.href='/posting/write'"
-    value="WRITE"
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
     />
-  </div>
-
-
-  <div class=Board>
-    <div class=Board_dataname>
-      <text class=postingnum>글번호</text>
-      <text class=postingtitle>제목</text>
-      <text class=postingwriter>작성자</text>
-      <text class=postinghits>조회수</text>
-      <text class=postingdate>작성일</text>
-    </div>
-    <%boarddata.forEach(function(element) {%>
-    <div class=Board_data>
-      <text class=postingnum><%=num%></text>
-      <%num -= 1%>
-      <a href="/posting/<%=element.id%>" class=postingtitle><%=element.title%></a>
-      <text class=postingwriter><%=element.writer%></text>
-      <text class=postinghits><%=element.hits%></text>
-      <text class=postingdate><%=element.showdate%></text>
-    </div>
-    <% });%>
-  </div>
-</div>
-</body>
-</html>
+  </head>
+  <body>
+    <div class="top_layout_wrap">
+      <div class="top_layout">
+      
+        <span class="top_layout_webname">UGRP_WebBoard</span>
   
+        <ul class="top_layout_ul">
+          <input
+            type="button"
+            class="top_layout_btn"
+            onclick=" location.href='/logout'"
+            value="LOGOUT"
+          />
+          <li class="top_layout_li"><i class="fas fa-user"></i></li>
+          <li class="top_layout_li"><i class="fas fa-cog"></i></li>
+        </ul>
+      </div>
+    </div>
+    
+
+    <div class="body_layout">
+      <div class="body_wrap">
+        <div class="lnb_layout">
+          <nav id="sidemenu" class="sidebar">
+            <h1 class="sidemenu_title">MENU</h1>
+            <ul class="sidemenu_ul">
+              <li class="sidemenu_li">메뉴1</li>
+              <li class="sidemenu_li">메뉴2</li>
+              <li class="sidemenu_li">메뉴3</li>
+            </ul>
+          </nav>
+        </div>
+        <div class="contents">
+          <header class=header>
+            <h1 id="contents_header_title">일반공지</span>
+            <input
+              type="button"
+              class="header_btn_write"
+              onclick=" location.href='/posting/write'"
+              value="WRITE"
+            /></header>
+            
+         
+          <div class="content_wrap">
+            <div class=Board_search></div>
+            <div class="Board">
+              <div class="Board_dataname">
+                <text class="postingnum">글번호</text>
+                <text class="postingtitle">제목</text>
+                <text class="postingwriter">작성자</text>
+                <text class="postinghits">조회수</text>
+                <text class="postingdate">작성일</text>
+              </div>
+              <%boarddata.forEach(function(element) {%>
+              <div class="Board_data">
+                <text class="postingnum"><%=num%></text>
+                <%num -= 1%>
+                <a href="/posting/<%=element.id%>" class="postingtitle"
+                  ><%=element.title%></a
+                >
+                <text class="postingwriter"><%=element.writer%></text>
+                <text class="postinghits"><%=element.hits%></text>
+                <text class="postingdate"><%=element.showdate%></text>
+              </div>
+              <% });%>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </body>
+</html>
