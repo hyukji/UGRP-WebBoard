@@ -9,11 +9,12 @@ var app = express()
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
 
-var usersRouter = require("./routes/users")
 var indexRouter = require("./routes/index")
 var loginRouter = require("./routes/login")
+var postingRouter = require("./routes/posting")
 
-let url = "mongodb://localhost:27017/web_vue"
+let url =
+  "mongodb+srv://hyukji:1234@cluster0-usnbq.mongodb.net/test?retryWrites=true&w=majority"
 mongoose.connect(url, { useNewUrlParser: true })
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -30,7 +31,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
 
 app.use("/api/login", loginRouter)
-app.use("/users", usersRouter)
+app.use("/posting", postingRouter)
 app.use("/api/home", indexRouter)
 
 // catch 404 and forward to error handler
