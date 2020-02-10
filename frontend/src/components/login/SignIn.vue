@@ -3,12 +3,12 @@
     <div>Sign In</div>
     ID :
     <input v-model="user.id" placeholder="ID" />
-    <br />Password :
+    <br/>Password :
     <input
       v-model="user.password"
       type="password"
       placeholder="password"
-    /><br />
+    /><br/>
     <button v-on:click="signIn">SignIn</button>
     <div>If u don't have account</div>
     <button v-on:click="toSignUp">SignUp</button>
@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     toSignUp: function(id) {
-      this.$router.push("/login/signUp");
+      this.$router.push("/signUp");
     },
     signIn: function(event) {
       this.$http
@@ -35,13 +35,13 @@ export default {
           //axios 사용
           user: this.user
         })
-        .then(response => {
-          if (response.data.result === 0) {
+        .then(res => {
+          if (res.data.result === 0) {
             alert("Error, please, try again");
           }
-          if (response.data.result === 1) {
+          if (res.data.result === 1) {
             alert("Success");
-            this.$router.push("/api/"); // Login 페이지로 보내줌
+            this.$router.push("/home"); // Login 페이지로 보내줌
           }
         })
         .catch(function(error) {

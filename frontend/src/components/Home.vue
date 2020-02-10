@@ -4,6 +4,7 @@
     <h2>{{ pageTitle }}</h2>
     <div>
       <button v-on:click="toSignIn">SignIn</button>
+      <button v-on:click="toSignUp">SignUp</button>
       <button v-on:click="toMakeNew">Write</button>
     </div>
     <table class="postings">
@@ -43,7 +44,10 @@ export default {
       this.$router.push("/newposting");
     },
     toSignIn: function(id) {
-      this.$router.push("/login/signIn");
+      this.$router.push("/signIn");
+    },
+    toSignUp: function() {
+      this.$router.push("/signUp")
     }
   },
   // 페이지가 열리면 실행되는 명령어입니다.

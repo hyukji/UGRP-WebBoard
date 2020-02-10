@@ -13,7 +13,7 @@ var usersRouter = require("./routes/users")
 var indexRouter = require("./routes/index")
 var loginRouter = require("./routes/login")
 
-let url = "mongodb://localhost:27017/web_vue"
+let url = "mongodb+srv://hyukji:1234@cluster0-usnbq.mongodb.net/test?retryWrites=true&w=majority"
 mongoose.connect(url, { useNewUrlParser: true })
 app.use(bodyParser.urlencoded({ extended: true }))
 
