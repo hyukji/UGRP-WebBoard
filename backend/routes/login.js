@@ -21,24 +21,37 @@ router.post("/signUp", function(req, res, next) {
       console.error(err);
       res.json({ result: 0 });
       return;
-    }
-    res.json({ result: 1 });
-  });
+    } else { res.json({ result: 1 });
+  }});
 });
 
 router.post("/signIn", function(req, res, next) {
-  User.findOne({ id: req.body.user.id }, function(err, db_user) {
-    if (err) {
-      console.error(err);
-      res.json({ result: 0 });
-      return;
-    }
-    if (db_user.id == req.body.user.id) {
-      res.json({ result: 1 });
-    } else {
-      res.json({ result: 0 });
-      return;
-    }
+  User.findOne({ id: req.body.user.id}, function(err, db_user) {
+    // 구문 error
+    if (err)
+      //next(err);
+      console.log(err);
+      return res.status(500).json({error: err});
+    // User가 없으면 error
+    if (!db_user) {
+      next(err);
+      console.log('session save');
+      //return res.status(406).json({error:err});
+      }
+
+    //req.session.user_id = req.body.user.id;
+    //res.json(user);
+    // if (err) {
+    //   console.error(err);
+    //   res.json({ result: 0 });
+    //   return;
+    // }
+    // if (db_user.id == req.body.user.id) {
+    //   res.json({ result: 1 });
+    // } else {
+    //   res.json({ result: 0 });
+    //   return;
+    // }
   });
 });
 

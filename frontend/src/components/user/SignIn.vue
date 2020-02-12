@@ -36,17 +36,17 @@ export default {
           user: this.user
         })
         .then(res => {
-          if (res.data.result === 0) {
-            alert("Error, please, try again");
+          // if (response.data.error) {
+          //   console.log(response.data.error)
+            console.log('response:'+res)
+            alert("Error, please, try again")
           }
-          if (res.data.result === 1) {
-            alert("Success");
-            this.$router.push("/home"); // Login 페이지로 보내줌
-          }
-        })
-        .catch(function(error) {
-          alert("error");
-        });
+          // if (response.data.result === 1) {
+          //   alert("Success");
+          //   this.$router.push("/home"); // Login 페이지로 보내줌
+          // }
+        //}
+      )
     }
   }
 };

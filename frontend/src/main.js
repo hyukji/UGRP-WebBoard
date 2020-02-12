@@ -8,6 +8,26 @@ Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false;
 
+Vue.config.errorHandler = (err, vm, info) => {
+  console.log('[Global Error Handler]'+
+              '\nerror: '+ err +
+              '\nvm: '+ vm +
+              '\ninfo: '+ info);
+} //cannot handle the error inside the methods
+
+axios.interceptors.response.use(
+function(res) { console.log(res); return res;},
+function(err) {
+    // handle error
+    console.log('interceptor error');
+    if (err) {
+        console.log('int interceptor');
+        alert(err.response.data.error);
+    // if (err.response) {
+    //     alert(error.response.data.message);
+    }
+});
+
 /* eslint-disable no-new */
 new Vue({
   el: "#app",
