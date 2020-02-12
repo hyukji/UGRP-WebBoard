@@ -3,6 +3,10 @@
     <!-- data 내 pageTitle의 값이 아래 h2에 들어갑니다. -->
     <h2>{{ pageTitle }}</h2>
     <table class="posting_detail">
+      <div>
+        <button v-on:click="toEdit">Edit</button>
+        <button v-on:click="toDelete">Delete</button>
+      </div>
       <td class>
         <span>{{ posting_Data.title }}</span>
         <span>{{ posting_Data.writer }}</span>
@@ -11,7 +15,7 @@
       </td>
     </table>
 
-    <button v-on:click="toHome">GoBack</button>
+    <button v-on:click="topostings">GoBack</button>
   </div>
 </template>
 
@@ -27,15 +31,34 @@ export default {
   },
   // 함수들을 지정하는 곳입니다.
   methods: {
-    toHome: function(id) {
-      this.$router.push("/home");
+    topostings: function(id) {
+      this.$router.push("/board");
+    },
+    toEdit: function(id) {
+      this.$router.push("/board/posting_edit");
+    },
+    toDelete: function(id) {
+      this.$http
+        .delete(`/api/posting/${id}`)
+        .then(response => {
+          if (response.data.result === 0) {
+            alert("Error, please, try again");
+          }
+          if (response.data.result === 1) {
+            alert("Success");
+            this.$router.push("/board"); // board 페이지로 보내줌
+          }
+        })
+        .catch(function(error) {
+          alert("error");
+        });
     }
   },
   // 페이지가 열리면 실행되는 명령어입니다.
   created() {
     console.log(11);
     var id = this.$route.params.id;
-    this.$http.get(`/api/home/${id}`).then(response => {
+    this.$http.get(`/api/posting/${id}`).then(response => {
       this.posting_Data = response.data;
     });
   }

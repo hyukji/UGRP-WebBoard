@@ -1,13 +1,16 @@
 <template>
   <div id="Newposting">
-    <div>Newposting</div>writer :
-    <input v-model="posting.writer" placeholder="writer" />
-    <br />title :
-    <input v-model="posting.title" placeholder="title" />
-    <br />body :
-    <input v-model="posting.body" placeholder="body" />
-    <br />
-    <button v-on:click="post_it">Posting</button>
+    <div>
+      <div>Newposting</div>writer :
+      <input v-model="posting.writer" placeholder="writer" />
+      <br />title :
+      <input v-model="posting.title" placeholder="title" />
+      <br />body :
+      <input v-model="posting.body" placeholder="body" />
+      <br />
+      <button v-on:click="post_it">Posting</button>
+      <button v-on:click="topostings">GoBack</button>
+    </div>
   </div>
 </template>
 
@@ -24,9 +27,12 @@ export default {
   },
 
   methods: {
+    topostings: function(id) {
+      this.$router.push("/board");
+    },
     post_it: function(event) {
       this.$http
-        .post("/api/home/newposting", {
+        .post("/api/posting/newposting", {
           //axios 사용
           posting: this.posting
         })

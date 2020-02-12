@@ -1,7 +1,12 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png" />
-    <router-view />
+    <header>
+      <span>Header 준비중</span>
+    </header>
+    <main>
+      <img src="./assets/logo.png" />
+      <router-view></router-view>
+    </main>
   </div>
 </template>
 
