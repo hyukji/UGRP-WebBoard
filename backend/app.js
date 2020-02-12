@@ -31,7 +31,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
 
 app.use("/api/login", loginRouter)
-app.use("/posting", postingRouter)
+app.use("/api/posting", postingRouter)
 app.use("/api/home", indexRouter)
 
 // catch 404 and forward to error handler

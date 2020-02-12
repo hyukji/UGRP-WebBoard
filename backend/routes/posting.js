@@ -6,7 +6,6 @@ router.get("/:id", function(req, res, next) {
   Posting.findOne({ _id: req.params.id }, function(err, posting) {
     res.send(posting)
   })
-  console.log("express 맞게 찾아옴.")
 })
 
 router.post("/newposting", function(req, res, next) {
@@ -32,6 +31,17 @@ router.patch("/:id", (req, res, next) => {
     { body: req.body.body },
     function(err, result) {}
   )
+})
+
+router.delete("/:id", (req, res, next) => {
+  Posting.findOneAndDelete({ _id: req.params.id }, function(err, posting) {
+    if (err) {
+      console.error(err)
+      res.json({ result: 0 })
+      return
+    }
+    res.json({ result: 1 })
+  })
 })
 
 module.exports = router
