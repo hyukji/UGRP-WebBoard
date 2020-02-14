@@ -26,10 +26,17 @@ router.post("/newposting", function(req, res, next) {
 })
 
 router.patch("/:id", (req, res, next) => {
-  Board.findByIdAndUpdate(
+  Posting.findByIdAndUpdate(
     { _id: req.params.id },
     { body: req.body.body },
-    function(err, result) {}
+    function(err, result) {
+      if (err) {
+        console.error(err)
+        res.json({ result: 0 })
+        return
+      }
+      res.json({ result: 1 })
+    }
   )
 })
 

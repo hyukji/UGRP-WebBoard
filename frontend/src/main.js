@@ -4,6 +4,19 @@ import Vue from "vue";
 import App from "./App";
 import router from "./router";
 import axios from "axios";
+
+//icon font (fontawesome)
+//좀더 깔끔하게 가져오는 방법을 찾기
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+library.add(faHome);
+library.add(faUser);
+
+Vue.component("font-awesome-icon", FontAwesomeIcon);
+
 Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false;
