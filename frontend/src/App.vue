@@ -43,8 +43,6 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-.wrapcontent {
-}
 .toparea {
   height: 50px;
   border-bottom: thin solid #202022;
