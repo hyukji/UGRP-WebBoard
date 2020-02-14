@@ -1,12 +1,31 @@
 <template>
   <div id="app">
-    <header>
-      <span>Header 준비중</span>
-    </header>
-    <main>
-      <img src="./assets/logo.png" />
-      <router-view></router-view>
-    </main>
+    <div class="wrapcontent">
+      <nav class="toparea">
+        <ul>
+          <div class="navbar">
+            <li>
+              <router-link to="/user">
+                <font-awesome-icon :icon="['fas', 'user']" />
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/home">
+                <font-awesome-icon :icon="['fas', 'home']" />
+              </router-link>
+            </li>
+          </div>
+        </ul>
+        <br />
+      </nav>
+      <main>
+        <h1>UGRP_Web</h1>
+        <img src="./assets/logo.png" />
+        <router-view class="default view"></router-view>
+        <br />
+        <router-view class="additional view" name="complement"></router-view>
+      </main>
+    </div>
   </div>
 </template>
 
@@ -23,6 +42,26 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+.toparea {
+  height: 50px;
+  border-bottom: thin solid #202022;
+  text-align: center;
+}
+ul {
+  display: inline-block;
+  width: 1000px;
+  height: 100%;
+  list-style-type: none;
+}
+li {
+  font-size: 25px;
+  margin-right: 1.5%;
+
+  float: right;
+}
+#navbar {
+  width: 100%;
+  text-align: left;
 }
 </style>

@@ -35,9 +35,11 @@ export default {
       this.$router.push("/board");
     },
     toEdit: function(id) {
-      this.$router.push("/board/posting_edit");
+      var id = this.$route.params.id;
+      this.$router.push(`/board/posting_edit/${id}`);
     },
-    toDelete: function(id) {
+    toDelete: function() {
+      var id = this.$route.params.id;
       this.$http
         .delete(`/api/posting/${id}`)
         .then(response => {
