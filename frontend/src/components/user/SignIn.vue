@@ -31,22 +31,16 @@ export default {
     },
     signIn: function(event) {
       this.$http
-        .post("/api/login/signIn", {
-          //axios 사용
+        .post("/api/signIn", {
           user: this.user
         })
         .then(res => {
-          // if (response.data.error) {
-          //   console.log(response.data.error)
+          if (res) {
             console.log('response:'+res)
-            alert("Error, please, try again")
-          }
-          // if (response.data.result === 1) {
-          //   alert("Success");
-          //   this.$router.push("/home"); // Login 페이지로 보내줌
-          // }
-        //}
-      )
+            alert('Success')
+            this.$router.push('/home')
+            }
+        })
     }
   }
 };

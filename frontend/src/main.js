@@ -16,13 +16,14 @@ Vue.config.errorHandler = (err, vm, info) => {
 } //cannot handle the error inside the methods
 
 axios.interceptors.response.use(
-function(res) { console.log(res); return res;},
+function(res) {
+  console.log('res:', res);
+  return res;},
 function(err) {
     // handle error
-    console.log('interceptor error');
     if (err) {
-        console.log('int interceptor');
-        alert(err.response.data.error);
+        console.log('interceptor:', err.response);
+        alert(err.response.data.msg);
     // if (err.response) {
     //     alert(error.response.data.message);
     }

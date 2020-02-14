@@ -10,7 +10,8 @@ const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
 
 var indexRouter = require("./routes/index")
-var loginRouter = require("./routes/login")
+var signinRouter = require("./routes/signIn")
+var signupRouter = require("./routes/signUp")
 var postingRouter = require("./routes/posting")
 
 let url =
@@ -30,7 +31,8 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
 
-app.use("/api/login", loginRouter)
+app.use("/api/signIn", signinRouter)
+app.use("/api/signUp", signupRouter)
 app.use("/api/posting", postingRouter)
 app.use("/api/home", indexRouter)
 
