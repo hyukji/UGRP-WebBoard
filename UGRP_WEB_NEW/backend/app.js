@@ -19,7 +19,7 @@ app.use(express.static("public"))
 
 let url =
   "mongodb+srv://seul:1234@cluster0-usnbq.mongodb.net/test?retryWrites=true&w=majority"
-mongoose.connect(url, { useNewUrlParser: true })
+mongoose.connect(url, { useNewUrlParsedr: true })
 app.use(bodyParser.urlencoded({ extended: true }))
 
 //app.use(require("connect-history-api-fallback")());
