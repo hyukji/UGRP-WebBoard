@@ -1,7 +1,5 @@
 <template>
-  <div class="wrap-introduction">
-    <p class="body-title">{{ middle_title }}</p>
-  </div>
+  <div class="wrap-introduction"></div>
 </template>
 
 <script>

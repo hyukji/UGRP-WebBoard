@@ -8,6 +8,14 @@ Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
 
+export const eventBus = new Vue({
+  methods: {
+    bell_route(route) {
+      this.$emit("bell_route", route)
+    }
+  }
+})
+
 new Vue({
   router,
   vuetify,

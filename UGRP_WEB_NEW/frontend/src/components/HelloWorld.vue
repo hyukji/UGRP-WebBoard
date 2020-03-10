@@ -19,6 +19,14 @@
       </v-col>
 
       <v-col class="mb-5" cols="12">
+        <h2 class="headline font-weight-bold mb-3">Now Start?</h2>
+
+        <v-row justify="center">
+          <a class="signin" href="/signin">로그인</a>
+          <a href="/signup">회원가입</a>
+        </v-row>
+      </v-col>
+      <v-col class="mb-5" cols="12">
         <h2 class="headline font-weight-bold mb-3">What's next?</h2>
 
         <v-row justify="center">
@@ -121,3 +129,6 @@ export default {
   })
 };
 </script>
+
+<style scoped>
+</style>

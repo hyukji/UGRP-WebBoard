@@ -63,7 +63,7 @@ export default {
           }
           if (response.data.result === 1) {
             alert("Success");
-            this.$router.push("/home"); // Login 페이지로 보내줌
+            this.$router.push("/signin"); // Login 페이지로 보내줌
           }
         })
         .catch(function(error) {

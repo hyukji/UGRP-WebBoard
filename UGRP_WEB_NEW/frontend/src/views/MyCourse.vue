@@ -2,7 +2,7 @@
   <div class="wrap-body">
     <p class="body-title">내 강의</p>
     <div class="wrap-Mycourse-cards">
-      <v-card class="mx-auto" max-width="300" hover href="http://localhost:8080/course/courseid">
+      <v-card class="mx-auto" max-width="300" hover href="/course/courseid">
         <v-img src="../assets/python.png" height="200px"></v-img>
 
         <v-card-title>프로그래밍(실습)</v-card-title>
